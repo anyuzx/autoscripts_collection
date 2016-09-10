@@ -11,7 +11,7 @@ args = parser.parse_args()
 files = glob.glob(args.input)
 nfiles = len(files)
 
-if parser.time is None:
+if args.time is None:
     sys.stdout.write('ERROR:Please specify a run time.\n')
     sys.stdout.flush()
     sys.exit(0)
