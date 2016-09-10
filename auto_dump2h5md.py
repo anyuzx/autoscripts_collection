@@ -13,7 +13,7 @@ nfiles = len(files)
 
 with open('dump2h5md.txt', 'w') as f:
     for fp in files:
-        f.write('python $WORK/myapps/toolbox/dump2h5md.py {} {} -l {}\n'.format(fp, fp + '.h5', fp + '.log'))
+        f.write('python $WORK/myapps/toolbox/dump2h5md.py {} {} -l {}\n'.format(fp, fp + '.h5', 'convert_' + fp + '.log'))
 
 with open('convert2h5md.sh', 'w') as f:
     f.write('#!/bin/bash\n')
