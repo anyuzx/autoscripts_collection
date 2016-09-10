@@ -5,11 +5,16 @@ import argparse
 
 parser = argparse.ArgumentParser(description='convert LAMMPS dump files to H5MD files.')
 parser.add_argument('-in', '--input', help='LAMMPS dump files path.', dest='input')
-parser.add_argument('-time', help='specify time required in minute unit.', dest='time')
+parser.add_argument('-time', help='specify time required in minute unit.', dest='time', type=int)
 args = parser.parse_args()
 
 files = glob.glob(args.input)
 nfiles = len(files)
+
+if parser.time is None:
+    sys.stdout.write('ERROR:Please specify a run time.\n')
+    sys.stdout.flush()
+    sys.exit(0)
 
 with open('dump2h5md.txt', 'w') as f:
     for fp in files:
