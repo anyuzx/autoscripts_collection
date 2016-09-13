@@ -3,8 +3,13 @@ import glob
 import os
 import argparse
 
-def main(input, time, hpc, run):
+def dump2h5md(input, time, hpc, run):
     files = glob.glob(input)
+    if len(files) == 0:
+        sys.stdout.write('No trajectories found. Please check the path is correct.')
+        sys.stdout.flush()
+        sys.exit(0)
+
     nfiles = len(files)
 
     # get $WORK directory path
@@ -64,4 +69,4 @@ if __name__ == '__main__':
     parser.add_argument('-run', help='run the job directly.', action='store_true', dest='run')
     args = parser.parse_args()
 
-    main(args.input, args.time, args.hpc, args.run)
+    dump2h5md(args.input, args.time, args.hpc, args.run)
