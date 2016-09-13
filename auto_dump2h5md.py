@@ -3,7 +3,7 @@ import glob
 import os
 import argparse
 
-def main(input, time, hpc):
+def main(input, time, hpc, run):
     files = glob.glob(input)
     nfiles = len(files)
 
@@ -50,7 +50,10 @@ def main(input, time, hpc):
     elif hpc == 'stampede':
         ltt.ltt('{}/launcher_template.stampede'.format(script_path), 'ltt_parameter.temp')
 
-    #os.system("sbatch convert2h5md.sh")
+    os.remove('ltt_parameter.temp')
+
+    if run:
+        os.system("sbatch convert2h5md.sh")
 
 
 if __name__ == '__main__':
@@ -58,6 +61,7 @@ if __name__ == '__main__':
     parser.add_argument('-in', '--input', help='LAMMPS dump files path.', dest='input')
     parser.add_argument('-time', help='specify time required in minute unit.', dest='time', type=int)
     parser.add_argument('-hpc', help='specify HPC cluster. stampede or ls5.', dest='hpc')
+    parser.add_argument('-run', help='run the job directly.', action='store_true', dest='run')
     args = parser.parse_args()
 
-    main(args.input, args.time, args.hpc)
+    main(args.input, args.time, args.hpc, args.run)
