@@ -31,23 +31,24 @@ def main(input, time, hpc):
 
     with open('dump2h5md.txt', 'w') as f:
         for fp in files:
+            fp_base = os.path.basename(fp)
             f.write('python {}/toolbox/dump2h5md.py {} {} -l {}\n'.format(myapps_path, \
-                    fp, fp + '.h5', 'convert_' + fp + '.log'))
+                    fp, fp_base + '.h5', 'convert_' + fp + '.log'))
 
     with open('ltt_parameter.temp', 'w') as f:
-        f.write('FILE: convert2h5md.sh\n')
-        f.write("job_name='dump2h5md'\n")
-        f.write("core_number={}\n".format(nfiles))
-        f.write("job_time={}\n".format(time))
+        f.write('FILENAME=convert2h5md.sh\n')
+        f.write("job_name=['dump2h5md']\n")
+        f.write("core_number=[{}]\n".format(nfiles))
+        f.write("job_time=[{}]\n".format(time))
         if hpc == 'ls5':
-            f.write("job_file='{}/dump2h5md.txt\n'".format(os.getcwd()))
+            f.write("job_file=['{}/dump2h5md.txt']\n".format(os.getcwd()))
         elif hpc == 'stampede':
-            f.write("job_file='dump2h5md.txt'\n")
+            f.write("job_file=['dump2h5md.txt']\n")
 
     if hpc == 'ls5':
-        ltt.ltt('{}/launcher_template.ls5', 'ltt_parameter.temp'.format(script_path, script_path))
+        ltt.ltt('{}/launcher_template.ls5'.format(script_path), 'ltt_parameter.temp')
     elif hpc == 'stampede':
-        ltt.ltt('{}/launcher_template.stampede', 'ltt_parameter.temp'.format(script_path, script_path))
+        ltt.ltt('{}/launcher_template.stampede'.format(script_path), 'ltt_parameter.temp')
 
     #os.system("sbatch convert2h5md.sh")
 
