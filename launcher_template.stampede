@@ -12,11 +12,11 @@
 #-------------------------------------------------------
 #
 #------------------Scheduler Options--------------------
-#SBATCH -J {{Job_name}}          # Job name
+#SBATCH -J {{job_name}}          # Job name
 #SBATCH -n {{core_number}}                  # Total number of tasks
 #SBATCH -p normal          # Queue name
 #SBATCH -o {{job_name}}.o%j      # Name of stdout output file (%j expands to jobid)
-#SBATCH -t 00:[{job_time}]:00            # Run time (hh:mm:ss)
+#SBATCH -t 00:{{job_time}}:00            # Run time (hh:mm:ss)
 #------------------------------------------------------
 
 #------------------General Options---------------------
