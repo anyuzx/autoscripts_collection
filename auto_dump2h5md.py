@@ -16,12 +16,12 @@ def main(input, time, hpc):
         sys.exit(0)
 
     if hpc == 'ls5':
-        myapps_path = $WORK/myapps
+        myapps_path = '{}/myapps'.format(work_path)
     elif hpc == 'stampede':
-        myapps_path = $WORK/stampede/myapps
+        myapps_path = '{}/stampede/myapps'.format(work_path)
 
     script_path = os.path.dirname(os.path.abspath(__file__))
-    sys.path.append(work_path+'/myapps/Lammps_Template_Tool')
+    sys.path.append(myapps_path+'/Lammps_Template_Tool')
     import ltt
 
     if time is None:
