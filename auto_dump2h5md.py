@@ -7,6 +7,9 @@ def main(input, time, hpc):
     files = glob.glob(input)
     nfiles = len(files)
 
+    # get $WORK directory path
+    work_path = os.environ['WORK']
+
     if hpc is None:
         sys.stdout.write('Please specify HPC cluster. Options: stampede and ls5.')
         sys.stdout.flush()
@@ -18,7 +21,7 @@ def main(input, time, hpc):
         myapps_path = $WORK/stampede/myapps
 
     script_path = os.path.dirname(os.path.abspath(__file__))
-    sys.path.append(myapps_path+'/Lammps_Template_Tool')
+    sys.path.append(work_path+'/myapps/Lammps_Template_Tool')
     import ltt
 
     if time is None:
