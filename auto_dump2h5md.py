@@ -40,14 +40,14 @@ def main(input, time, hpc):
         f.write("core_number={}\n".format(nfiles))
         f.write("job_time={}\n".format(time))
         if hpc == 'ls5':
-            f.write("job_file={}/dump2h5md.txt\n".format(os.getcwd()))
+            f.write("job_file='{}/dump2h5md.txt\n'".format(os.getcwd()))
         elif hpc == 'stampede':
-            f.write("job_file=dump2h5md.txt\n")
+            f.write("job_file='dump2h5md.txt'\n")
 
     if hpc == 'ls5':
-        ltt.main('{}/launcher_template.ls5', 'ltt_parameter.temp'.format(script_path, script_path))
+        ltt.ltt('{}/launcher_template.ls5', 'ltt_parameter.temp'.format(script_path, script_path))
     elif hpc == 'stampede':
-        ltt.main('{}/launcher_template.stampede', 'ltt_parameter.temp'.format(script_path, script_path))
+        ltt.ltt('{}/launcher_template.stampede', 'ltt_parameter.temp'.format(script_path, script_path))
 
     #os.system("sbatch convert2h5md.sh")
 
