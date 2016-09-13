@@ -45,9 +45,9 @@ def main(input, time, hpc):
             f.write("job_file=dump2h5md.txt\n")
 
     if hpc == 'ls5':
-        ltt.main('{}/launcher_template.ls5', '{}/ltt_parameter.temp'.format(script_path, script_path))
+        ltt.main('{}/launcher_template.ls5', 'ltt_parameter.temp'.format(script_path, script_path))
     elif hpc == 'stampede':
-        ltt.main('{}/launcher_template.stampede', '{}/ltt_parameter.temp'.format(script_path, script_path))
+        ltt.main('{}/launcher_template.stampede', 'ltt_parameter.temp'.format(script_path, script_path))
 
     #os.system("sbatch convert2h5md.sh")
 
