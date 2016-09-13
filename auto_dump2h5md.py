@@ -6,9 +6,17 @@ import argparse
 def dump2h5md(input, time, hpc, run):
     files = glob.glob(input)
     if len(files) == 0:
-        sys.stdout.write('No trajectories found. Please check the path is correct.')
+        sys.stdout.write('No trajectories found. Please check the path is correct.\n')
         sys.stdout.flush()
         sys.exit(0)
+    else:
+        for fp in files:
+            if os.path.isfile(fp):
+                continue
+            else:
+                sys.stdout.write('{} is not a file.\n'.format(fp))
+                sys.stdout.flush()
+                sys.exit(0)
 
     nfiles = len(files)
 
