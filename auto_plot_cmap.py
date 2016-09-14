@@ -54,7 +54,7 @@ def auto_cmap(input, time, hpc, run, avg, others):
                 cmap += np.load(fp)
             except:
                 cmap = np.load(fp)
-        np.save(avg)
+        np.save(avg, cmap)
         with open('cmap_plot.txt', 'a') as f:
             fp_base = os.path.basename(avg)
             f.write('python {}/toolbox/contactmap.py -in {} -out {}{}\n'.format(myapps_path,\
@@ -85,7 +85,7 @@ if __name__ == "__main__":
     parser.add_argument('-in', '--input', help='Contact map data file path. Put quote around wildcard.', dest='input')
     parser.add_argument('-time', help='Specify time required in unit of minute.', dest='time', type=int)
     parser.add_argument('-hpc', help='Specify HPC cluster. Options: stampede or ls5.', dest='hpc', choices=['ls5','stampede'])
-    parser.add_argument('-avg', '--average', help='plot average from multiple files. Specify average data file name.', dest='avg')
+    parser.add_argument('-avg', '--average', help='plot average from multiple files. Specify average data file name.', dest='avg', type=str)
     parser.add_argument('-run', help='Submit the job directly. Otherwise this script just generate a slurm script file', action='store_true', dest='run')
     parser.add_argument('-others', help="Specify additional argument. Provide with quote around it. Additional arguments info can be found in toolbox/contactmap.py")
     args = parser.parse_args()
