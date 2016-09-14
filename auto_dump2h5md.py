@@ -3,7 +3,7 @@ import glob
 import os
 import argparse
 
-def dump2h5md(input, time, hpc, run, others):
+def auto_dump2h5md(input, time, hpc, run, others):
     files = glob.glob(input)
     if len(files) == 0:
         sys.stdout.write('No trajectories found. Please check the path is correct.\n')
@@ -79,4 +79,4 @@ if __name__ == '__main__':
     parser.add_argument('-others', help="Specify additional argument. Provide with quote around it. Example: -others '-s 10'. Additional arguments info can be found in toolbox/dump2h5md.py", type=str, dest='others')
     args = parser.parse_args()
 
-    dump2h5md(args.input, args.time, args.hpc, args.run, args.others)
+    auto_dump2h5md(args.input, args.time, args.hpc, args.run, args.others)
