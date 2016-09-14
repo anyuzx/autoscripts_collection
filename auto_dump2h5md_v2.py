@@ -46,7 +46,7 @@ def dump2h5md(input, time, hpc, run, others):
         for fp in files:
             fp_base = os.path.basename(fp)
             f.write('python {}/toolbox/dump2h5md.py {} {} -l {}{}\n'.format(myapps_path, \
-                    fp, fp_base + '.h5', 'convert_' + fp + '.log', \
+                    fp, fp_base + '.h5', 'convert_' + fp_base + '.log', \
                     (lambda x: ' '+others if x is not None else '')(others)))
 
     with open('ltt_parameter.temp', 'w') as f:
