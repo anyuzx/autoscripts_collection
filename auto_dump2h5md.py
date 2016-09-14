@@ -76,7 +76,7 @@ if __name__ == '__main__':
     parser.add_argument('-time', help='Specify time required in unit of minute.', dest='time', type=int)
     parser.add_argument('-hpc', help='Specify HPC cluster. Options: stampede or ls5.', dest='hpc', choices=['ls5', 'stampede'])
     parser.add_argument('-run', help='Submit the job directly. Otherwise this script just generate a slurm script file', action='store_true', dest='run')
-    parser.add_argument('-others', help="Specify additional argument. Provide with quote around it. Example: -others '-others -s 10'. Additional arguments info can be found in toolbox/dump2h5md.py", type=str, dest='others')
+    parser.add_argument('-others', help="Specify additional argument. Provide with quote around it. Example: -others '-s 10'. Additional arguments info can be found in toolbox/dump2h5md.py", type=str, dest='others')
     args = parser.parse_args()
 
     dump2h5md(args.input, args.time, args.hpc, args.run, args.others)
