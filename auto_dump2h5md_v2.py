@@ -3,7 +3,7 @@ import glob
 import os
 import argparse
 
-def dump2h5md(input, time, hpc, run):
+def dump2h5md(input, time, hpc, run, others):
     files = glob.glob(input)
     if len(files) == 0:
         sys.stdout.write('No trajectories found. Please check the path is correct.\n')
@@ -47,7 +47,7 @@ def dump2h5md(input, time, hpc, run):
             fp_base = os.path.basename(fp)
             f.write('python {}/toolbox/dump2h5md.py {} {} -l {}{}\n'.format(myapps_path, \
                     fp, fp_base + '.h5', 'convert_' + fp + '.log', \
-                    (lambda x: ' '+args.others if x is not None else '')(args.others)))
+                    (lambda x: ' '+others if x is not None else '')(others)))
 
     with open('ltt_parameter.temp', 'w') as f:
         f.write('FILENAME=convert2h5md.sh\n')
