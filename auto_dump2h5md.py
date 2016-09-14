@@ -3,7 +3,7 @@ import glob
 import os
 import argparse
 
-def dump2h5md(input, time, hpc, run):
+def dump2h5md(input, time, hpc, run, others):
     files = glob.glob(input)
     if len(files) == 0:
         sys.stdout.write('No trajectories found. Please check the path is correct.\n')
@@ -45,8 +45,9 @@ def dump2h5md(input, time, hpc, run):
     with open('dump2h5md.txt', 'w') as f:
         for fp in files:
             fp_base = os.path.basename(fp)
-            f.write('python {}/toolbox/dump2h5md.py {} {} -l {}\n'.format(myapps_path, \
-                    fp, fp_base + '.h5', 'convert_' + fp + '.log'))
+            f.write('python {}/toolbox/dump2h5md.py {} {} -l {}{}\n'.format(myapps_path, \
+                    fp, fp_base + '.h5', 'convert_' + fp_base + '.log', \
+                    (lambda x: ' '+others if x is not None else '')(others)))
 
     with open('ltt_parameter.temp', 'w') as f:
         f.write('FILENAME=convert2h5md.sh\n')
@@ -70,11 +71,12 @@ def dump2h5md(input, time, hpc, run):
 
 
 if __name__ == '__main__':
-    parser = argparse.ArgumentParser(description='convert LAMMPS dump files to H5MD files.')
-    parser.add_argument('-in', '--input', help='LAMMPS dump files path.', dest='input')
-    parser.add_argument('-time', help='specify time required in minute unit.', dest='time', type=int)
-    parser.add_argument('-hpc', help='specify HPC cluster. stampede or ls5.', dest='hpc')
-    parser.add_argument('-run', help='run the job directly.', action='store_true', dest='run')
+    parser = argparse.ArgumentParser(description='This script is used to convert multiple LAMMPS dump files to H5MD format on TACC using Launcher.')
+    parser.add_argument('-in', '--input', help='LAMMPS dump files path. Put quote around wildcard. ', dest='input')
+    parser.add_argument('-time', help='Specify time required in unit of minute.', dest='time', type=int)
+    parser.add_argument('-hpc', help='Specify HPC cluster. Options: stampede or ls5.', dest='hpc', choices=['ls5', 'stampede'])
+    parser.add_argument('-run', help='Submit the job directly. Otherwise this script just generate a slurm script file', action='store_true', dest='run')
+    parser.add_argument('-others', help="Specify additional argument. Provide with quote around it. Example: -others '-others -s 10'. Additional arguments info can be found in toolbox/dump2h5md.py", type=str, dest='others')
     args = parser.parse_args()
 
-    dump2h5md(args.input, args.time, args.hpc, args.run)
+    dump2h5md(args.input, args.time, args.hpc, args.run, args.others)
