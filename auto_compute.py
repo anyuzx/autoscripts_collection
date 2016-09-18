@@ -21,12 +21,12 @@ def main(template, parameter, time, hpc):
     parameter_file_lst = ltt.ltt(template, parameter)
     njobs = len(parameter_file_lst)
 
-    with open('compute_complete.txt', 'w') as f:
+    with open('compute.txt', 'w') as f:
         for fp in parameter_file_lst:
             f.write('python {}/H5MD_Analysis/AnalysisTool.py {} -l {}\n'.format(myapps_path, \
                     fp, os.path.splitext(fp)[0]+'.log'))
 
-    with open('compute_complete.sh', 'w') as f:
+    with open('compute.sh', 'w') as f:
         f.write('#!/bin/bash\n')
         f.write('#SBATCH -J cdp\n')
         f.write('#SBATCH -o cdp.out\n')
