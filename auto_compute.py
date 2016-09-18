@@ -19,7 +19,7 @@ def main(template, parameter, time, hpc, run):
         sys.exit(0)
 
     parameter_file_lst = ltt.ltt(template, parameter)
-    njobs = len(parameter_file_lst)
+    nfiles = len(parameter_file_lst)
 
     with open('compute.txt', 'w') as f:
         for fp in parameter_file_lst:
