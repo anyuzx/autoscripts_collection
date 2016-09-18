@@ -18,7 +18,7 @@ def main(template, parameter, time, hpc):
         sys.stdout.flush()
         sys.exit(0)
 
-    parameter_file_lst = ltt.main(template, parameter)
+    parameter_file_lst = ltt.ltt(template, parameter)
     njobs = len(parameter_file_lst)
 
     with open('compute_complete.txt', 'w') as f:
