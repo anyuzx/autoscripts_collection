@@ -58,7 +58,7 @@ def auto_cmap(input, time, hpc, run, avg, others):
         with open('cmap_plot.txt', 'a') as f:
             fp_base = os.path.basename(avg)
             f.write('python {}/toolbox/contactmap.py -in {} -out {}{}\n'.format(myapps_path,\
-                avg, 'cmap_'+fp_base+'.png',(lambda x: ' '+others if x is not None else '')(others)))
+                avg, fp_base+'.png',(lambda x: ' '+others if x is not None else '')(others)))
 
     with open('ltt_parameter.temp', 'w') as f:
         f.write('FILENAME=cmap_plot.sh\n')

@@ -7,10 +7,10 @@ def main(template, parameter, time, hpc):
     work_path = os.environ['WORK']
     if hpc == 'ls5':
         sys.path.append('{}/myapps/Lammps_Template_Tool'.format(work_path))
-        myapps_path = $WORK/myapps
+        myapps_path = '{}/myapps'.format(work_path)
     elif hpc == 'stampede':
         sys.path.append('{}/stampede/myapps/Lammps_Template_Tool'.format(work_path))
-        myapps_path = $WORK/stampede/myapps
+        myapps_path = '{}/stampede/myapps'.format(work_path)
     import ltt
 
     if time is None:
