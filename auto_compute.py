@@ -3,7 +3,7 @@ import sys
 import argparse
 
 
-def main(template, parameter, time, hpc):
+def main(template, parameter, time, hpc, run):
     work_path = os.environ['WORK']
     if hpc == 'ls5':
         sys.path.append('{}/myapps/Lammps_Template_Tool'.format(work_path))
