@@ -4,13 +4,20 @@ import argparse
 
 
 def main(template, parameter, time, hpc, run):
+    if hpc is None:
+        sys.stdout.write('Please specify HPC cluster. Options: stampede and ls5.')
+        sys.stdout.flush()
+        sys.exit(0)
+
     work_path = os.environ['WORK']
+
     if hpc == 'ls5':
-        sys.path.append('{}/myapps/Lammps_Template_Tool'.format(work_path))
         myapps_path = '{}/myapps'.format(work_path)
     elif hpc == 'stampede':
-        sys.path.append('{}/stampede/myapps/Lammps_Template_Tool'.format(work_path))
         myapps_path = '{}/stampede/myapps'.format(work_path)
+
+    script_path = os.path.dirname(os.path.abspath(__file__))
+    sys.path.append(myapps_path+'/Lammps_Template_Tool')
     import ltt
 
     if time is None:
